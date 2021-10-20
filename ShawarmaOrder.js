@@ -50,11 +50,14 @@ module.exports = class ShwarmaOrder extends Order{
                 aReturn.push(`${this.sUrl}/payment/${this.sNumber}/`);
                 break;
             case OrderState.PAYMENT:
-                console.log(sInput);
+                console.log(sInput.purchase_units);
+                console.log(sInput.purchase_units[0].shipping);
+                console.log(sInput.purchase_units[0].shipping.address.address_line_1);
+                let address = sInput.purchase_units[0].shipping.address.address_line_1;
                 this.isDone(true);
                 let d = new Date();
                 d.setMinutes(d.getMinutes() + 20);
-                aReturn.push(`Your order will be delivered at ${d.toTimeString()}`);
+                aReturn.push(`Your order will ti address ${address} be delivered at ${d.toTimeString()}`);
                 break;
         }
         return aReturn;
